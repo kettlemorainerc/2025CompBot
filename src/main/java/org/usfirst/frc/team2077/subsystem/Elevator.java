@@ -16,7 +16,7 @@ public class Elevator implements Subsystem {
             rightElevatorMotor = new TalonSRX(2);
 
     public Elevator(){
-
+        ;
     }
     /*raises the elevator w(ﾟДﾟ)w,
     all numbers are placeholders in all files made in this branch unless stated otherwise stated
@@ -44,7 +44,8 @@ public class Elevator implements Subsystem {
         }
     }
     public void stop(){
-
+        leftElevatorMotor.set(ControlMode.PercentOutput, 0);
+        rightElevatorMotor.set(ControlMode.PercentOutput, 0);
     }
 
 }
