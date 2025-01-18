@@ -33,7 +33,7 @@ public class Elevator implements Subsystem {
             rightElevatorMotor.set(ControlMode.PercentOutput, 0.5);
         }
     }
-    public void lower(ROBOTSIDE robotside){
+    public static void lower(ROBOTSIDE robotside){
         if (robotside == ROBOTSIDE.LEFT) {
             leftElevatorMotor.set(ControlMode.PercentOutput, -0.5);
         }else if(robotside == ROBOTSIDE.RIGHT){

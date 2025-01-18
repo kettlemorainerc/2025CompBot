@@ -27,7 +27,7 @@ public class ElevatorPositionControl extends RepeatedCommand {
                 Elevator.raise(robotside);
                 break;
             case DOWN:
-
+                Elevator.lower(robotside);
                 break;
         }
 
