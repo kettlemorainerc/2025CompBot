@@ -7,9 +7,11 @@ package org.usfirst.frc.team2077;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
+import org.usfirst.frc.team2077.command.ExtendController;
 import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.command.*;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
+import org.usfirst.frc.team2077.subsystem.Extendinator;
 // import org.usfirst.frc.team2077.common.control.DriveXboxController;
 
 /**
@@ -63,6 +65,8 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
+        new ExtendController(ExtendController.MOVEDIRECTION.IN).bind(new JoystickButton(secondary,3));
+        new ExtendController(ExtendController.MOVEDIRECTION.OUT).bind(new JoystickButton(secondary,1));
     }
 
     /** Normal (silver/brighter) joystick that supports rotation */
