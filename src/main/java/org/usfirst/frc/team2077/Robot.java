@@ -10,6 +10,12 @@ public class Robot extends TimedRobot {
     @Override public void robotInit() {
         hardware = new RobotHardware();
         driveStation = new DriveStation(hardware);
+
+        // Make sure you only configure port forwarding once in your robot code.
+        // Do not place these function calls in any periodic functions
+        for (int port = 5800; port <= 5809; port++) {
+            edu.wpi.first.net.PortForwarder.add(port, "limelight.local", port);
+        }
     }
 
     @Override public void robotPeriodic() {
