@@ -68,6 +68,7 @@ package org.usfirst.frc.team2077;
 // import edu.wpi.first.cameraserver.CameraServer;
 import org.usfirst.frc.team2077.common.HardwareRequirements;
 import org.usfirst.frc.team2077.common.WheelPosition;
+import org.usfirst.frc.team2077.common.subsystem.MotorRun;
 import org.usfirst.frc.team2077.drivetrain.swerve.SwerveChassis;
 // import org.usfirst.frc.team2077.subsystem.*;
 import org.usfirst.frc.team2077.drivetrain.swerve.SwerveModule;
@@ -81,6 +82,7 @@ public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChas
         return instance;
     }
 
+    public final MotorRun motorRun;
     // public final Climbers climbers;
     // public final Intake intake;
     // public final Launcher launcher;
@@ -94,6 +96,7 @@ public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChas
 //        CameraServer.startAutomaticCapture(0);
 //        CameraServer.startAutomaticCapture(1);
 
+        motorRun = new MotorRun();
     //     climbers = new Climbers();
     //     pivot    = new LauncherPivot();
     //     launcher = new Launcher();

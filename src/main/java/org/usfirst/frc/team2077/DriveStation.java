@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.command.*;
+import org.usfirst.frc.team2077.common.command.NewTest.Direction;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
 // import org.usfirst.frc.team2077.common.control.DriveXboxController;
 
@@ -63,7 +64,8 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
-        new NewTest().bind(new JoystickButton(secondary, 11));
+        new NewTest(Direction.FORWARD).bind(new JoystickButton(secondary, 11));
+        new NewTest(Direction.BACKWARD).bind(new JoystickButton(secondary, 12));
     }
 
 
