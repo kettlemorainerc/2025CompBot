@@ -53,7 +53,7 @@ public class DriveStation {
         // hardware.getPosition().setDefaultCommand(new CardinalMovement(hardware, driveStick));
         // hardware.getHeading().setDefaultCommand(new RotationMovement(hardware, driveStick));
 
-        bindDriverControl(hardware, driveStick);
+        // bindDriverControl(hardware, driveStick);
         bindTechnicalControl(hardware, technicalStick);
     }
 
@@ -63,7 +63,10 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
+        new NewTest().bind(new JoystickButton(secondary, 11));
     }
+
+
 
     /** Normal (silver/brighter) joystick that supports rotation */
     private static DriveJoystick getJoystick() {
