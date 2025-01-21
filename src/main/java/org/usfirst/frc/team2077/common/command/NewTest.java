@@ -15,6 +15,7 @@ import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.util.RuntimeLoader;
+import edu.wpi.first.wpilibj.DigitalInput;
 import pabeles.concurrency.IntOperatorTask.Max;
 
 public class NewTest extends RepeatedCommand {
@@ -29,21 +30,27 @@ public class NewTest extends RepeatedCommand {
 
     private final MotorRun motorRun;
     private final Direction direction;
+    private final DigitalInput limitSwitch;
 
     public NewTest(Direction direction){
         // launcher = RobotHardware.getInstance().launcher;
         // this.target = target;
         motorRun = RobotHardware.getInstance().motorRun;
+        limitSwitch = new DigitalInput(9);
         this.direction = direction;
     }
 
     @Override
     public void execute() {
         // launcher.run(target);
-        if (direction == Direction.FORWARD) {
-            motorRun.startForward();
-        } else {
-            motorRun.startBackward();
+        if (limitSwitch.get()){
+            motorRun.stopMotor();
+        }else{
+            if (direction == Direction.FORWARD) {
+                motorRun.startForward();
+            } else {
+                motorRun.startBackward();
+            }
         }
 
     }
