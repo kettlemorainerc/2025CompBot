@@ -8,7 +8,8 @@ public class Elevator implements Subsystem {
 
     public static enum ROBOTSIDE {
         LEFT,
-        RIGHT
+        RIGHT,
+        BOTH
     }
 
     private static final TalonSRX
@@ -23,27 +24,19 @@ public class Elevator implements Subsystem {
     this will be placed in other places as well to remind you to remind you of this
     */
 
-    public static void raise(ROBOTSIDE robotside){
-        if (robotside == ROBOTSIDE.LEFT) {
-            leftElevatorMotor.set(ControlMode.PercentOutput, 0.5);
-        }else if(robotside == ROBOTSIDE.RIGHT){
-            rightElevatorMotor.set(ControlMode.PercentOutput, 0.5);
-        }else {
-            leftElevatorMotor.set(ControlMode.PercentOutput, 0.5);
-            rightElevatorMotor.set(ControlMode.PercentOutput, 0.5);
-        }
+    public static void raiseRight(){
+
     }
-    public static void lower(ROBOTSIDE robotside){
-        if (robotside == ROBOTSIDE.LEFT) {
-            leftElevatorMotor.set(ControlMode.PercentOutput, -0.5);
-        }else if(robotside == ROBOTSIDE.RIGHT){
-            rightElevatorMotor.set(ControlMode.PercentOutput, -0.5);
-        }else {
-            leftElevatorMotor.set(ControlMode.PercentOutput, -.75);
-            rightElevatorMotor.set(ControlMode.PercentOutput, -.75);
-        }
+    public static void raiseLeft(){
+
     }
-    public void stop(){
+    public static void lowerRight(){
+
+    }
+    public static void lowerLeft(){
+
+    }
+    public static void stop(){
         leftElevatorMotor.set(ControlMode.PercentOutput, 0);
         rightElevatorMotor.set(ControlMode.PercentOutput, 0);
     }

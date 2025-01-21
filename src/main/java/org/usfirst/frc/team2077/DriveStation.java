@@ -7,10 +7,12 @@ package org.usfirst.frc.team2077;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
+import org.usfirst.frc.team2077.command.ElevatorPositionControl;
 import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.command.*;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
 import org.usfirst.frc.team2077.common.control.DriveXboxController;
+import org.usfirst.frc.team2077.subsystem.Elevator;
 
 /**
  * This class is intended to be the center point of defining actions that can be utilized during teleop segments of
@@ -63,6 +65,9 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
+        //2 and 6 are up and down, 5 and 7 left and right, each respectively
+
+
     }
 
     /** Normal (silver/brighter) joystick that supports rotation */

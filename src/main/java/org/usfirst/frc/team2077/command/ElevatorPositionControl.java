@@ -5,33 +5,21 @@ import org.usfirst.frc.team2077.subsystem.Elevator;
 
 public class ElevatorPositionControl extends RepeatedCommand {
 
-    public enum INPUTDIRECTION{
-        UP,
-        DOWN
+    public enum ROBOTSIDE {
+        LEFT,
+        RIGHT,
     }
 
-    private final INPUTDIRECTION direction;
-    private final Elevator.ROBOTSIDE robotside;
-    private final Elevator elevator;
+    private final ROBOTSIDE robotside;
 
-    public ElevatorPositionControl(INPUTDIRECTION direction, Elevator.ROBOTSIDE robotside, Elevator elevator) {
-        this.direction = direction;
+    public ElevatorPositionControl(ROBOTSIDE robotside) {
         this.robotside = robotside;
-        this.elevator = elevator;
     }
 
     @Override
     public void initialize(){
-        switch (direction){
-            case UP:
-                Elevator.raise(robotside);
-                break;
-            case DOWN:
-                Elevator.lower(robotside);
-                break;
-        }
 
-    }
+        }
 
     @Override
     public void execute() {
@@ -42,4 +30,5 @@ public class ElevatorPositionControl extends RepeatedCommand {
     public void end(boolean interrupted) {
 
     }
+
 }
