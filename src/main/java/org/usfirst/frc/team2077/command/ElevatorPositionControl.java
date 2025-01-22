@@ -53,7 +53,7 @@ public class ElevatorPositionControl extends RepeatedCommand {
 
     @Override
     public void end(boolean interrupted) {
-
+        Elevator.stop();
     }
 
 }
