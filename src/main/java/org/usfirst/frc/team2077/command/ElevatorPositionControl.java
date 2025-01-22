@@ -19,6 +19,7 @@ public class ElevatorPositionControl extends RepeatedCommand {
     private final LeftElevatorController.LEFTELEVATORDIRECTION leftmoveirection;
     private final RightElevatorController.RIGHTELEVATORDIRECTION rightmovedirection;
 
+    //i <3 multiple constructors
     public ElevatorPositionControl(ROBOTSIDE robotside) {
         this.robotside = robotside;
         rightmovedirection = null;
@@ -30,6 +31,8 @@ public class ElevatorPositionControl extends RepeatedCommand {
         robotside = ROBOTSIDE.BOTH;
     }
 
+    // this big ol' fellow determines which side to move the arms and then tells them to do there thing while passing them an up or down
+    //I am an advocate for comments in human languages, please do not write me a paragraph describing what two lines do
     @Override
     public void initialize(){
         switch(robotside){

@@ -67,12 +67,18 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
-        //2 and 6 are up and down, 5 and 7 left and right, each respectively
+    //Elevator commands
+    //2 and 6 are up and down, 5 and 7 left and right, each respectively
+    //  i know this is disgustingly long, but i now love being able to have multiple constructors
 new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.UP, LeftElevatorController.LEFTELEVATORDIRECTION.UP).bind(new JoystickButton(secondary, 2));
 new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.DOWN, LeftElevatorController.LEFTELEVATORDIRECTION.DOWN).bind(new JoystickButton(secondary, 6));
 
 new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.LEFT).bind(new JoystickButton(secondary, 5));
 new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.LEFT).bind(new JoystickButton(secondary, 7));
+
+    //Extendinator commands
+
+    // Twisty wrist commands
 
 
     }
