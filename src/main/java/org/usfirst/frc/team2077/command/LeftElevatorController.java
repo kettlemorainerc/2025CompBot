@@ -38,6 +38,6 @@ public class LeftElevatorController extends RepeatedCommand {
 
     @Override
     public void end(boolean interrupted) {
-
+        Elevator.stop();
     }
 }
