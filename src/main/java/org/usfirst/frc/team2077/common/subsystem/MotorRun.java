@@ -12,6 +12,8 @@ import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import org.usfirst.frc.team2077.RobotHardware;
 import org.usfirst.frc.team2077.util.SmartDash.SmartDashRobotPreference;
@@ -22,6 +24,7 @@ public class MotorRun implements Subsystem {
     
     private final SparkMax max;
     private final SparkClosedLoopController maxPid;
+    private final DigitalInput limitSwitch;
     // private final Launcher launcher;
     // private final Launcher.Target target;
 
@@ -30,6 +33,7 @@ public class MotorRun implements Subsystem {
         // this.target = target;
         max = new SparkMax(14, MotorType.kBrushless);
         maxPid = max.getClosedLoopController();
+        limitSwitch = new DigitalInput(9);
         SparkMaxConfig config = new SparkMaxConfig();
         config
             .inverted(false)
@@ -45,11 +49,19 @@ public class MotorRun implements Subsystem {
     }
 
     public void startForward(){
-        max.set(0.05);
+        if(limitSwitch.get()){
+            max.set(0.05);
+        }else{
+            max.set(0.00);
+        }
     }
 
     public void startBackward(){
-        max.set(-0.05);
+        if(limitSwitch.get()){
+            max.set(-0.05);
+        }else{
+            max.set(0.00);
+        }
     }
 
     public void stopMotor(){

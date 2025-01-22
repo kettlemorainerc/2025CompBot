@@ -30,28 +30,24 @@ public class NewTest extends RepeatedCommand {
 
     private final MotorRun motorRun;
     private final Direction direction;
-    private final DigitalInput limitSwitch;
 
     public NewTest(Direction direction){
         // launcher = RobotHardware.getInstance().launcher;
         // this.target = target;
         motorRun = RobotHardware.getInstance().motorRun;
-        limitSwitch = new DigitalInput(9);
+        
         this.direction = direction;
     }
 
     @Override
     public void execute() {
         // launcher.run(target);
-        if (limitSwitch.get()){
-            motorRun.stopMotor();
-        }else{
-            if (direction == Direction.FORWARD) {
-                motorRun.startForward();
-            } else {
-                motorRun.startBackward();
-            }
+        if (direction == Direction.FORWARD) {
+            motorRun.startForward();
+        } else {
+            motorRun.startBackward();
         }
+        
 
     }
 
