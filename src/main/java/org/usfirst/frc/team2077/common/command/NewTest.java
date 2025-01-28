@@ -52,7 +52,7 @@ public class NewTest extends RepeatedCommand {
             motorRun.startForward();
         } else if (direction == Direction.BACKWARD) {
             motorRun.startBackward();
-        } else {
+        } else if (direction == Direction.AUTO) {
             double tx = LimelightHelpers.getTX("");
             int tid = (int) LimelightHelpers.getFiducialID("");
             if(Arrays.stream(CORAL_APRIL_TAGS).anyMatch(i -> i == tid)){
@@ -69,6 +69,8 @@ public class NewTest extends RepeatedCommand {
                 motorRun.startForward();
             }
 
+        }else{
+            System.out.println("Not Used Enum in NewTest");
         }
 
         
