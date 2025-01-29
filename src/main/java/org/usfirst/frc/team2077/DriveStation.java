@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.*;
 import org.usfirst.frc.team2077.command.ExtendController;
 import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.command.*;
+import org.usfirst.frc.team2077.common.command.NewTest.Direction;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
 import org.usfirst.frc.team2077.subsystem.Extendinator;
 // import org.usfirst.frc.team2077.common.control.DriveXboxController;
@@ -55,7 +56,7 @@ public class DriveStation {
         // hardware.getPosition().setDefaultCommand(new CardinalMovement(hardware, driveStick));
         // hardware.getHeading().setDefaultCommand(new RotationMovement(hardware, driveStick));
 
-        bindDriverControl(hardware, driveStick);
+        // bindDriverControl(hardware, driveStick);
         bindTechnicalControl(hardware, technicalStick);
     }
 
@@ -65,9 +66,12 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
-        new ExtendController(ExtendController.MOVEDIRECTION.IN).bind(new JoystickButton(secondary,3));
-        new ExtendController(ExtendController.MOVEDIRECTION.OUT).bind(new JoystickButton(secondary,1));
+        new NewTest(Direction.FORWARD).bind(new JoystickButton(secondary, 11));
+        // new NewTest(Direction.BACKWARD).bind(new JoystickButton(secondary, 12));
+        new ExtendController().bind(new JoystickButton(secondary,1));
     }
+
+
 
     /** Normal (silver/brighter) joystick that supports rotation */
     private static DriveJoystick getJoystick() {

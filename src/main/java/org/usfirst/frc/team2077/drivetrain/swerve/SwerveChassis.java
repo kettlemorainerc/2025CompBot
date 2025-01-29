@@ -18,7 +18,7 @@ import java.util.Map;
 public class SwerveChassis extends AbstractChassis<SwerveModule> {
 
     private final SwerveMath math;
-    private final AHRS gyro = new AHRS(NavXComType.kMXP_UART); //Not sure about this
+    private final AHRS gyro = new AHRS(NavXComType.kMXP_SPI);
 
     private final double maxDrivePercent = 0.65;
     private final double minDriveInputPercent = 0.001;

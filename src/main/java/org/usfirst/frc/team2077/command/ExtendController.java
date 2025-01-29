@@ -5,28 +5,21 @@ import org.usfirst.frc.team2077.subsystem.Extendinator;
 
 public class ExtendController extends RepeatedCommand {
 
-    public enum MOVEDIRECTION {
-        IN,
-        OUT,
-    }
 
-    private final MOVEDIRECTION movedirection;
-
-    public ExtendController(MOVEDIRECTION movedirection) {
-        this.movedirection = movedirection;
+    public ExtendController() {
 
     }
 
     @Override
     public void initialize() {
-        switch (movedirection){
-            case IN:
-                Extendinator.retract();
-                break;
-            case OUT:
-                Extendinator.extend();
-                break;
-        }
+        // switch (movedirection){
+        //     case IN:
+        //         Extendinator.retract();
+        //         break;
+        //     case OUT:
+        //         Extendinator.extend();
+        //         break;
+        // }
     }
 
     @Override
@@ -36,6 +29,6 @@ public class ExtendController extends RepeatedCommand {
 
     @Override
     public void end(boolean interrupted) {
-        Extendinator.stopHaltCease();
+        // Extendinator.stopHaltCease();
     }
 }
