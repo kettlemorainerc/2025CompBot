@@ -12,9 +12,9 @@ import org.usfirst.frc.team2077.command.LeftElevatorController;
 import org.usfirst.frc.team2077.command.RightElevatorController;
 import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.command.*;
+import org.usfirst.frc.team2077.common.command.NewTest.Direction;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
-import org.usfirst.frc.team2077.common.control.DriveXboxController;
-import org.usfirst.frc.team2077.subsystem.Elevator;
+// import org.usfirst.frc.team2077.common.control.DriveXboxController;
 
 /**
  * This class is intended to be the center point of defining actions that can be utilized during teleop segments of
@@ -38,8 +38,8 @@ public class DriveStation {
     public DriveStation(RobotHardware hardware) {
         /** Set the driver's control method this MUST be a {@link DriveStick} implementation */
 //        driveStick = getFlysky();
-//        driveStick = getJoystick();
-        driveStick = getXbox();
+       driveStick = getJoystick();
+        // driveStick = getXbox();
 
         /** Set the technical control method. This can be any {@link Joystick} implementation */
 //        technicalStick = getTechnicalJoystick();
@@ -54,10 +54,10 @@ public class DriveStation {
      */
     public void bind(RobotHardware hardware) {
         // Setup basic robot movement commands
-        hardware.getPosition().setDefaultCommand(new CardinalMovement(hardware, driveStick));
-        hardware.getHeading().setDefaultCommand(new RotationMovement(hardware, driveStick));
+        // hardware.getPosition().setDefaultCommand(new CardinalMovement(hardware, driveStick));
+        // hardware.getHeading().setDefaultCommand(new RotationMovement(hardware, driveStick));
 
-        bindDriverControl(hardware, driveStick);
+        // bindDriverControl(hardware, driveStick);
         bindTechnicalControl(hardware, technicalStick);
     }
 
@@ -67,21 +67,22 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
-    //Elevator commands
-    //2 and 6 are up and down, 5 and 7 left and right, each respectively
-    //  i know this is disgustingly long, but i now love being able to have multiple constructors
-new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.UP, LeftElevatorController.LEFTELEVATORDIRECTION.UP).bind(new JoystickButton(secondary, 2));
-new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.DOWN, LeftElevatorController.LEFTELEVATORDIRECTION.DOWN).bind(new JoystickButton(secondary, 6));
+        //2 and 6 for up down, 5 and 7 for just left and right
+        new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.UP, LeftElevatorController.LEFTELEVATORDIRECTION.UP).bind(new JoystickButton(secondary, 2));
+        new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.DOWN, LeftElevatorController.LEFTELEVATORDIRECTION.DOWN).bind(new JoystickButton(secondary, 6));
 
-new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.LEFT).bind(new JoystickButton(secondary, 5));
-new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.LEFT).bind(new JoystickButton(secondary, 7));
+        new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.RIGHT).bind(new JoystickButton(secondary, 7));
+        new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.LEFT).bind(new JoystickButton(secondary, 5));
 
-    //Extendinator commands
-
-    // Twisty wrist commands
+        //next thingy or mabob goes here
 
 
+
+        new NewTest(Direction.FORWARD).bind(new JoystickButton(secondary, 11));
+        new NewTest(Direction.BACKWARD).bind(new JoystickButton(secondary, 12));
     }
+
+
 
     /** Normal (silver/brighter) joystick that supports rotation */
     private static DriveJoystick getJoystick() {
@@ -95,10 +96,10 @@ new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.LEFT).bind(new Joy
                                                 .setRotationSensitivity(.05, 2.5);
     }
 
-    private static DriveXboxController getXbox(){
-        return new DriveXboxController(DRIVE_XBOX_PORT).setDriveSensitivity(.15,1)
-                                                       .setRotationSensitivity(.05,1.5);
-    }
+    // private static DriveXboxController getXbox(){
+    //     return new DriveXboxController(DRIVE_XBOX_PORT).setDriveSensitivity(.15,1)
+    //                                                    .setRotationSensitivity(.05,1.5);
+    // }
 
     /** Currently the darker joystick that doesn't support rotation */
     private static Joystick getTechnicalJoystick() {
