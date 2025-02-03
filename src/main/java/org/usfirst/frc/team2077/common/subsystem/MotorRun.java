@@ -50,7 +50,7 @@ public class MotorRun implements Subsystem {
 
     public void startForward(){
         if(limitSwitch.get()){
-            max.set(0.05);
+            max.set(0.20);
         }else{
             max.set(0.00);
         }
@@ -58,7 +58,7 @@ public class MotorRun implements Subsystem {
 
     public void startBackward(){
         if(limitSwitch.get()){
-            max.set(-0.05);
+            max.set(-0.20);
         }else{
             max.set(0.00);
         }
