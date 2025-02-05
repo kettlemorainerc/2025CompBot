@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.usfirst.frc.team2077.RobotHardware;
 import org.usfirst.frc.team2077.common.subsystem.MotorRun;
+import org.usfirst.frc.team2077.subsystem.Elevinator;
 
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
@@ -29,18 +30,22 @@ public class NewTest extends RepeatedCommand {
     public enum Direction{
         FORWARD,
         BACKWARD,
-        AUTO
+        AUTO,
+        UP,
+        DOWN
     }
 
     private static final int[] CORAL_APRIL_TAGS = new int[]{6, 7, 8, 9, 10, 11, 17, 18, 19, 20, 21, 22};
 
     private final MotorRun motorRun;
     private final Direction direction;
+    private final Elevinator elevinator;
 
     public NewTest(Direction direction){
         // launcher = RobotHardware.getInstance().launcher;
         // this.target = target;
         motorRun = RobotHardware.getInstance().motorRun;
+        elevinator = RobotHardware.getInstance().elevinator;
         
         this.direction = direction;
     }
@@ -69,6 +74,9 @@ public class NewTest extends RepeatedCommand {
                 motorRun.startForward();
             }
 
+        }else if(direction == Direction.UP){
+            
+
         }else{
             System.out.println("Not Used Enum in NewTest");
         }
@@ -81,6 +89,7 @@ public class NewTest extends RepeatedCommand {
     public void end(boolean interrupted) {
         // launcher.stopLauncher();
         motorRun.stopMotor();
+        elevinator.stopElevinators();
     }
 
     
