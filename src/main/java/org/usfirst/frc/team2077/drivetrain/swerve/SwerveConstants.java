@@ -24,10 +24,10 @@ public class SwerveConstants {
 
     // Module Specific Constants
     public enum MotorPosition{
-        FRONT_LEFT (2, 1, 1.5, 1.05166e-01, 1.21232e-03, 4.33481e-01),
-        BACK_RIGHT (6, 5, 0.5, 2.12917e-01, 1.60747e-03, 4.41048e-01),
-        BACK_LEFT  (8, 7, 1,   1.93749e-01, 1.61658e-03, 5.56800e-01),
-        FRONT_RIGHT(4, 3, 0,   1.49872e-01, 1.45941e-03, 3.03550e-01),
+        FRONT_LEFT (12, 11, 1.5, 1.05166e-01, 1.21232e-03, 4.33481e-01),
+        BACK_RIGHT (17, 5, 0.5, 2.12917e-01, 1.60747e-03, 4.41048e-01),
+        BACK_LEFT  (13, 7, 1,   1.93749e-01, 1.61658e-03, 5.56800e-01),
+        FRONT_RIGHT(10, 3, 0,   1.49872e-01, 1.45941e-03, 3.03550e-01),
         ;
 
         public final int drivingCANid, guidingCANid;
