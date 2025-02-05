@@ -64,6 +64,7 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
+        new NewTest(Direction.AUTO).bind(new JoystickButton(secondary, 10));
         new NewTest(Direction.FORWARD).bind(new JoystickButton(secondary, 11));
         new NewTest(Direction.BACKWARD).bind(new JoystickButton(secondary, 12));
     }
