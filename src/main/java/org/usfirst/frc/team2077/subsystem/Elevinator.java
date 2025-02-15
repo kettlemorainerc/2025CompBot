@@ -35,43 +35,45 @@ public class Elevinator implements Subsystem{
     }
 
     public void raiseElevinators(){
-        setBoth(0.5);
+        setBoth(0.9);
     }
 
     public void lowerElevinators(){
-        setBoth(-0.5);
+        setBoth(-0.9);
     }
 
     public void setBoth(double percentage){
-        if(useEncoders == true){
-            System.out.println("leftLifter encoder: " + leftLifter.getSelectedSensorPosition());
+        leftLifter.set(ControlMode.PercentOutput, percentage);
+        rightLifter.set(ControlMode.PercentOutput, 0- percentage);
 
-            if ((leftLifter.getSelectedSensorPosition() < 50 && percentage < 0) || (leftLifter.getSelectedSensorPosition() > 500 && percentage > 0)) {
-                leftLifter.set(ControlMode.PercentOutput, 0);
-            }else{
-                leftLifter.set(ControlMode.PercentOutput, percentage);
-            }
+
+        // if(useEncoders){
+        //     System.out.println("leftLifter encoder: " + leftLifter.getSelectedSensorPosition());
+
+        //     if ((leftLifter.getSelectedSensorPosition() < 50 && percentage < 0) || (leftLifter.getSelectedSensorPosition() > 500 && percentage > 0)) {
+        //         leftLifter.set(ControlMode.PercentOutput, 0);
+        //     }else{
+        //         leftLifter.set(ControlMode.PercentOutput, percentage);
+        //     }
     
-            //Figure out which lifter needs to be inverted, otherwise the robot will explode and kill everyone in the building...
-            if ((rightLifter.getSelectedSensorPosition() < 50 && percentage < 0) || (rightLifter.getSelectedSensorPosition() > 500 && percentage > 0)) {
-                rightLifter.set(ControlMode.PercentOutput, 0);
-            }else{
-                rightLifter.set(ControlMode.PercentOutput, percentage);
-            }
-        }else if(useEncoders == false){
-            if(leftSwitch.get() && percentage < 0){
+        //     //Figure out which lifter needs to be inverted, otherwise the robot will explode and kill everyone in the building...
+        //     if ((rightLifter.getSelectedSensorPosition() < 50 && percentage < 0) || (rightLifter.getSelectedSensorPosition() > 500 && percentage > 0)) {
+        //         rightLifter.set(ControlMode.PercentOutput, 0);
+        //     }else{
+        //         rightLifter.set(ControlMode.PercentOutput, percentage);
+        //     }
+        if(!useEncoders){
+            if(!leftSwitch.get() && percentage < 0){
                 leftLifter.set(ControlMode.PercentOutput, 0);
             }else{
-                leftLifter.set(ControlMode.PercentOutput, percentage);
+                leftLifter.set(ControlMode.PercentOutput, percentage * 1.45);
             }
-            if(rightSwitch.get()  && percentage < 0){
+            if(!rightSwitch.get() && percentage < 0){
                 rightLifter.set(ControlMode.PercentOutput, 0);
             }else{
-                rightLifter.set(ControlMode.PercentOutput, percentage);
+                rightLifter.set(ControlMode.PercentOutput, 0 - percentage);
             }
-            
         }
-
 
     }
 

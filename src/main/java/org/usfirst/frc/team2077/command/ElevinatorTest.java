@@ -40,9 +40,9 @@ public class ElevinatorTest extends RepeatedCommand {
     public void execute() {
         // extendinator.goToPickup();
         if(mover == Move.UP){
-            elevinator.lowerElevinators();
-        }else if(mover == Move.DOWN){
             elevinator.raiseElevinators();
+        }else if(mover == Move.DOWN){
+            elevinator.lowerElevinators();
         }
 
     }

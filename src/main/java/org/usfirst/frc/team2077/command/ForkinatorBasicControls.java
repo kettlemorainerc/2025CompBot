@@ -5,22 +5,23 @@ import org.usfirst.frc.team2077.common.command.RepeatedCommand;
 import org.usfirst.frc.team2077.subsystem.Forkinator;
 
 public class ForkinatorBasicControls extends RepeatedCommand {
-    public enum Direction{
+    public enum ForkDirection{
         UP,
         DOWN
     }
 
-    private final Direction direction;
+    private final ForkDirection direction;
     private final Forkinator forkinator;
 
-    public ForkinatorBasicControls(Direction direction){
-        this.direction = direction;
+    public ForkinatorBasicControls(ForkDirection up){
+        this.direction = up;
         forkinator = RobotHardware.getInstance().forkinator;
     }
 
+
     @Override
     public void execute() {
-        if(direction == Direction.UP){
+        if(direction == ForkDirection.UP){
             forkinator.raiseForkinator();
         }
     }
