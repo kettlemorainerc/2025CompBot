@@ -9,6 +9,7 @@ import org.usfirst.frc.team2077.drivetrain.swerve.SwerveChassis;
 import org.usfirst.frc.team2077.drivetrain.swerve.SwerveModule;
 import org.usfirst.frc.team2077.subsystem.Elevinator;
 import org.usfirst.frc.team2077.subsystem.Extendinator;
+import org.usfirst.frc.team2077.subsystem.Forkinator;
 
 public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChassis> {
 
@@ -19,10 +20,10 @@ public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChas
         return instance;
     }
 
-    public final MotorRun motorRun;
+    // public final MotorRun motorRun;
     // public final Elevator elevator;
-    // public final Forkinator forkinator;
-    public final Extendinator extendinator;
+    public final Forkinator forkinator;
+    // public final Extendinator extendinator;
     public final Elevinator elevinator;
 
 
@@ -34,10 +35,11 @@ public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChas
 //        CameraServer.startAutomaticCapture(0);
 //        CameraServer.startAutomaticCapture(1);
 
-        extendinator = new Extendinator(RobotHardware.getInstance().motorRun);
-        motorRun = new MotorRun();
+        // extendinator = new Extendinator(RobotHardware.getInstance().motorRun);
+        // motorRun = new MotorRun();
         chassis  = new SwerveChassis();
         elevinator = new Elevinator();
+        forkinator = new Forkinator();
     }
 
     @Override public SwerveChassis getChassis() {

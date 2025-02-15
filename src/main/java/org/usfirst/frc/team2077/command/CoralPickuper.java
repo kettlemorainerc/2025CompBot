@@ -7,11 +7,11 @@ import org.usfirst.frc.team2077.subsystem.Extendinator;
 
 public class CoralPickuper extends RepeatedCommand {
 
-    private final Extendinator extendinator;
+    // private final Extendinator extendinator;
     private final Elevinator elevinator;
 
     public CoralPickuper() {
-        extendinator = RobotHardware.getInstance().extendinator;
+        // extendinator = RobotHardware.getInstance().extendinator;
         elevinator = RobotHardware.getInstance().elevinator;
  
     }
@@ -32,7 +32,7 @@ public class CoralPickuper extends RepeatedCommand {
     @Override
     public void execute() {
         // extendinator.goToPickup();
-        elevinator.raiseLeftElevinator();
+        elevinator.lowerElevinators();
 
     }
 

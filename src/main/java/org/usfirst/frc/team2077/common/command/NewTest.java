@@ -37,14 +37,14 @@ public class NewTest extends RepeatedCommand {
 
     private static final int[] CORAL_APRIL_TAGS = new int[]{6, 7, 8, 9, 10, 11, 17, 18, 19, 20, 21, 22};
 
-    private final MotorRun motorRun;
+    // private final MotorRun motorRun;
     private final Direction direction;
     private final Elevinator elevinator;
 
     public NewTest(Direction direction){
         // launcher = RobotHardware.getInstance().launcher;
         // this.target = target;
-        motorRun = RobotHardware.getInstance().motorRun;
+        // motorRun = RobotHardware.getInstance().motorRun;
         elevinator = RobotHardware.getInstance().elevinator;
         
         this.direction = direction;
@@ -54,24 +54,24 @@ public class NewTest extends RepeatedCommand {
     public void execute() {
         // launcher.run(target);
         if (direction == Direction.FORWARD) {
-            motorRun.startForward();
+            // motorRun.startForward();
         } else if (direction == Direction.BACKWARD) {
-            motorRun.startBackward();
+            // motorRun.startBackward();
         } else if (direction == Direction.AUTO) {
             double tx = LimelightHelpers.getTX("");
             int tid = (int) LimelightHelpers.getFiducialID("");
             if(Arrays.stream(CORAL_APRIL_TAGS).anyMatch(i -> i == tid)){
                 if (tx > 2) {
-                    motorRun.startForward();
+                    // motorRun.startForward();
                     // boolean hasTarget = LimelightHelpers.getTV("");
                     // SmartDashboard.putBoolean("Target", hasTarget);
                 }else if(tx < -2){
-                    motorRun.startBackward();
+                    // motorRun.startBackward();
                 }else{
-                    motorRun.stopMotor();
+                    // motorRun.stopMotor();
                 }
             }else{
-                motorRun.startForward();
+                // motorRun.startForward();
             }
 
         }else if(direction == Direction.UP){
@@ -88,7 +88,7 @@ public class NewTest extends RepeatedCommand {
     @Override
     public void end(boolean interrupted) {
         // launcher.stopLauncher();
-        motorRun.stopMotor();
+        // motorRun.stopMotor();
         elevinator.stopElevinators();
     }
 
