@@ -9,14 +9,11 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 
 import org.usfirst.frc.team2077.command.CoralPickuper;
-import org.usfirst.frc.team2077.command.ElevinatorTest;
 import org.usfirst.frc.team2077.command.ForkinatorBasicControls;
 import org.usfirst.frc.team2077.command.ForkinatorBasicControls.ForkDirection;
-import org.usfirst.frc.team2077.command.ElevinatorTest.Move;
 import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.control.DriveXboxController;
 import org.usfirst.frc.team2077.common.command.*;
-import org.usfirst.frc.team2077.common.command.NewTest.Direction;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
 // import org.usfirst.frc.team2077.common.control.DriveXboxController;
 
@@ -71,11 +68,7 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
-        new NewTest(Direction.AUTO).bind(new JoystickButton(secondary, 10));
-        new NewTest(Direction.FORWARD).bind(new JoystickButton(secondary, 11));
         // new NewTest(Direction.BACKWARD).bind(new JoystickButton(secondary, 12));
-        new ElevinatorTest(Move.UP).bind(new JoystickButton(secondary,1));
-        new ElevinatorTest(Move.DOWN).bind(new JoystickButton(secondary, 5));
         // new ForkinatorBasicControls(ForkDirection.UP).bind(new JoystickButton(secondary, 4));
         // new ForkinatorBasicControls(ForkDirection.DOWN).bind(new JoystickButton(secondary, 8));
     }
