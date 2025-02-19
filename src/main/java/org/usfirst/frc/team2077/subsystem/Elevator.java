@@ -15,13 +15,11 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 public class Elevator implements Subsystem {
 
     private final SparkMax elevatorMotor;
-    private final SparkClosedLoopController maxPID;
-
+    private final double encoder;
 
 
     public Elevator(){
         elevatorMotor = new SparkMax(1, SparkLowLevel.MotorType.kBrushless);
-        maxPID = elevatorMotor.getClosedLoopController();
         SparkMaxConfig config = new SparkMaxConfig();
         config
                 .inverted(false)
@@ -33,6 +31,10 @@ public class Elevator implements Subsystem {
                 .feedbackSensor(ClosedLoopConfig.FeedbackSensor.kPrimaryEncoder)
                 .pid(1.0,0.0,0.0);
         elevatorMotor.configure(config, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
+
+        encoder = elevatorMotor.getEncoder().getPosition();
+
+        System.out.println(encoder);
     }
     /*raises the elevator w(ﾟДﾟ)w,
     all numbers are placeholders in all files made in this branch unless stated otherwise stated
@@ -41,6 +43,16 @@ public class Elevator implements Subsystem {
 
     public void raise(){elevatorMotor.set(0.01);}
     public void lower(){elevatorMotor.set(-0.01);}
+
+    public void moveToTop(){
+
+    }
+    public void moveToMiddle(){
+
+    }
+    public void moveToBottom(){
+
+    }
 
     public void stop(){elevatorMotor.set(0);}
 }
