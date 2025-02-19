@@ -5,6 +5,7 @@ import org.usfirst.frc.team2077.subsystem.Elevator;
 
 public class ElevatorPositionControl extends RepeatedCommand {
 
+
     public enum MOVEDIRECTION {
         UP,
         DOWN
@@ -18,7 +19,7 @@ public class ElevatorPositionControl extends RepeatedCommand {
     public ElevatorPositionControl(MOVEDIRECTION movedirection, Elevator elevator) {
         this.movedirection = movedirection;
         this.elevator = elevator;
-
+    }
 
 //I am an advocate for comments in human languages, please do not write me a paragraph describing what two lines do
     @Override
@@ -40,7 +41,7 @@ public class ElevatorPositionControl extends RepeatedCommand {
 
     @Override
     public void end(boolean interrupted) {
-        Elevator.stop();
+        elevator.stop();
     }
 
 }

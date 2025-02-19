@@ -7,8 +7,9 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class Elevator implements Subsystem {
 
-    private static final TalonSRX
-            elevatorMotor = new TalonSRX(1);
+    private static final Cans
+            elevatorMotor = new CanSP(1
+
 
     public Elevator(){
         ;

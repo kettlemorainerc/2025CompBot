@@ -35,12 +35,12 @@ public class DriveStation {
     private final Joystick technicalStick;
 
     public DriveStation(RobotHardware hardware) {
-        /** Set the driver's control method this MUST be a {@link DriveStick} implementation */
+        /* Set the driver's control method this MUST be a {@link DriveStick} implementation */
 //        driveStick = getFlysky();
        driveStick = getJoystick();
         // driveStick = getXbox();
 
-        /** Set the technical control method. This can be any {@link Joystick} implementation */
+        /* Set the technical control method. This can be any {@link Joystick} implementation */
 //        technicalStick = getTechnicalJoystick();
         technicalStick = getNumpad();
 
@@ -67,8 +67,8 @@ public class DriveStation {
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
         //2 and 6 for up down, 5 and 7 for just left and right
-        new ElevatorPositionControl(ElevatorPositionControl.MOVEDIRECTION.UP, ).bind(new JoystickButton(secondary, 1));
-        new ElevatorPositionControl(ElevatorPositionControl.MOVEDIRECTION.DOWN, ).bind(new JoystickButton(secondary, 5));
+        new ElevatorPositionControl(ElevatorPositionControl.MOVEDIRECTION.UP, new Elevator()).bind(new JoystickButton(secondary, 1));
+        new ElevatorPositionControl(ElevatorPositionControl.MOVEDIRECTION.DOWN, new Elevator()).bind(new JoystickButton(secondary, 5));
 
 
         //next thingy or mabob goes here
