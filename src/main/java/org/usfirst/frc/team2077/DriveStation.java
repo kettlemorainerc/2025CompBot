@@ -12,6 +12,7 @@ import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.command.*;
 import org.usfirst.frc.team2077.common.command.NewTest.Direction;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
+import org.usfirst.frc.team2077.subsystem.Elevator;
 // import org.usfirst.frc.team2077.common.control.DriveXboxController;
 
 /**
@@ -66,11 +67,9 @@ public class DriveStation {
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
         //2 and 6 for up down, 5 and 7 for just left and right
-        new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.UP, LeftElevatorController.LEFTELEVATORDIRECTION.UP).bind(new JoystickButton(secondary, 2));
-        new ElevatorPositionControl(RightElevatorController.RIGHTELEVATORDIRECTION.DOWN, LeftElevatorController.LEFTELEVATORDIRECTION.DOWN).bind(new JoystickButton(secondary, 6));
+        new ElevatorPositionControl(ElevatorPositionControl.MOVEDIRECTION.UP, ).bind(new JoystickButton(secondary, 1));
+        new ElevatorPositionControl(ElevatorPositionControl.MOVEDIRECTION.DOWN, ).bind(new JoystickButton(secondary, 5));
 
-        new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.RIGHT).bind(new JoystickButton(secondary, 7));
-        new ElevatorPositionControl(ElevatorPositionControl.ROBOTSIDE.LEFT).bind(new JoystickButton(secondary, 5));
 
         //next thingy or mabob goes here
 

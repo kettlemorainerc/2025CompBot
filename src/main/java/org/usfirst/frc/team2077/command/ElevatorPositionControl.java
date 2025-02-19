@@ -11,29 +11,31 @@ public class ElevatorPositionControl extends RepeatedCommand {
     }
 
     private final MOVEDIRECTION movedirection;
+    private final Elevator elevator;
 
 
 
-    public ElevatorPositionControl(MOVEDIRECTION movedirection) {
+    public ElevatorPositionControl(MOVEDIRECTION movedirection, Elevator elevator) {
         this.movedirection = movedirection;
+        this.elevator = elevator;
 
 
 //I am an advocate for comments in human languages, please do not write me a paragraph describing what two lines do
     @Override
     public void initialize(){
-        switch(MOVEDIRECTION){
-            case UP:
-                Elevator.raise();
-                break;
-            case DOWN:
-                Elevator.lower();
-                break;
-  }
+
         }
 
     @Override
     public void execute() {
-
+            switch(movedirection){
+                case UP:
+                    elevator.raise();
+                    break;
+                case DOWN:
+                    elevator.lower();
+                    break;
+            }
     }
 
     @Override
