@@ -8,6 +8,7 @@ package org.usfirst.frc.team2077.common.command;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.*;
 import org.usfirst.frc.team2077.RobotHardware;
+import org.usfirst.frc.team2077.common.control.DriveStick;
 import org.usfirst.frc.team2077.common.control.DriveXboxController;
 import org.usfirst.frc.team2077.common.drivetrain.*;
 
@@ -15,10 +16,10 @@ public class CardinalMovement extends Command {
     protected DriveXboxController stick;
     protected DriveChassisIF chassis;
 
-    public CardinalMovement(DriveXboxController stick) {
+    public CardinalMovement(DriveXboxController driveStick) {
         addRequirements(RobotHardware.getInstance().getPosition());
 
-        this.stick = stick;
+        this.stick = driveStick;
         this.chassis = RobotHardware.getInstance().getChassis();
     }
 
