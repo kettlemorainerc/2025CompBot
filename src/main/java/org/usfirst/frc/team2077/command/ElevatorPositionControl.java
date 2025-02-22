@@ -8,7 +8,10 @@ public class ElevatorPositionControl extends RepeatedCommand {
 
     public enum MOVEDIRECTION {
         UP,
-        DOWN
+        DOWN,
+        TOP,
+        MIDDLE,
+        BOTTOM
     }
 
     private final MOVEDIRECTION movedirection;
@@ -35,6 +38,15 @@ public class ElevatorPositionControl extends RepeatedCommand {
                     break;
                 case DOWN:
                     elevator.lower();
+                    break;
+                case TOP:
+                    elevator.moveToTop();
+                    break;
+                case MIDDLE:
+                    elevator.moveToMiddle();
+                    break;
+                case BOTTOM:
+                    elevator.moveToBottom();
                     break;
             }
     }

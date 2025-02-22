@@ -10,12 +10,26 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import org.usfirst.frc.team2077.util.PIDTuneable;
+import org.usfirst.frc.team2077.util.SmartDash.SmartDashNumber;
 
 public class Elevator implements Subsystem {
 
-    private final SparkMax elevatorMotor;
     private final double encoder;
+    public SmartDashNumber elevatorP = new SmartDashNumber("Elevator P",1d, false);
+    public SmartDashNumber elevatorI = new SmartDashNumber("Elevator I",0d, false);
+    public SmartDashNumber elevatorD = new SmartDashNumber("Elevator D",0d, false);
+
+    public SmartDashNumber topPosition;
+    public SmartDashNumber middlePosition;
+    public SmartDashNumber bottomPosition;
+
+    private final SparkMax elevatorMotor;
+    private final PIDController pid = new PIDController(elevatorP.get(), elevatorI.get(),elevatorD.get());
+
 
 
     public Elevator(){
@@ -45,13 +59,14 @@ public class Elevator implements Subsystem {
     public void lower(){elevatorMotor.set(-0.01);}
 
     public void moveToTop(){
+        elevatorMotor.set(pid.calculate(topPosition.get()-encoder, topPosition.get()));
+        }
 
-    }
     public void moveToMiddle(){
-
+        elevatorMotor.set(pid.calculate(middlePosition.get()-encoder, middlePosition.get()));
     }
     public void moveToBottom(){
-
+        elevatorMotor.set(pid.calculate(bottomPosition.get()-encoder, bottomPosition.get()));
     }
 
     public void stop(){elevatorMotor.set(0);}
