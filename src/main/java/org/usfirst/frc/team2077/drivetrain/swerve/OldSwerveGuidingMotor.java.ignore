@@ -1,22 +1,10 @@
 package org.usfirst.frc.team2077.drivetrain.swerve;
 
 import com.revrobotics.*;
-import com.revrobotics.spark.SparkAbsoluteEncoder;
-import com.revrobotics.spark.SparkBase;
-import com.revrobotics.spark.SparkLowLevel;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.SparkBase.*;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.networktables.DoublePublisher;
-import edu.wpi.first.networktables.NetworkTableInstance;
-
-import org.usfirst.frc.team2077.drivetrain.swerve.SwerveConstants.MotorPosition;
 import org.usfirst.frc.team2077.util.PIDTuneable;
 
-public class SwerveGuidingMotor implements PIDTuneable {
+public class OldSwerveGuidingMotor implements PIDTuneable {
 
     private final SwerveConstants.MotorPosition position;
     private final SwerveModule parent;
@@ -24,7 +12,7 @@ public class SwerveGuidingMotor implements PIDTuneable {
     private final AbsoluteEncoder absoluteEncoder;
     private final RelativeEncoder relativeEncoder;
 
-    private final SparkMax motor;
+    private final CANSparkMax motor;
     private final PIDController PID;
 
     private double angleOffset = 0.0;
@@ -34,43 +22,30 @@ public class SwerveGuidingMotor implements PIDTuneable {
 
     private double atAngleDeadzone = Math.PI / 12.0;
 
-    private final NetworkTableInstance badTest;
-    DoublePublisher xPub;
-
-    public SwerveGuidingMotor(SwerveConstants.MotorPosition position, SwerveModule parent) {
+    public OldSwerveGuidingMotor(SwerveConstants.MotorPosition position, SwerveModule parent) {
         this.parent = parent;
         this.position = position;
 
-        badTest = NetworkTableInstance.getDefault();
-        badTest.getTable("SmartDashboard");
-        xPub = badTest.getDoubleTopic(getName()).publish();
-
         angleOffset = position.angleOffset;
 
-        motor = new SparkMax(position.guidingCANid, SparkLowLevel.MotorType.kBrushless);
-        SparkMaxConfig config = new SparkMaxConfig();
-        
-        config.idleMode(IdleMode.kBrake);
-        config.smartCurrentLimit(SwerveConstants.guidingMotorCurrentLimit/5);       
+        motor = new CANSparkMax(position.guidingCANid, CANSparkLowLevel.MotorType.kBrushless);
+        motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        motor.setSmartCurrentLimit(SwerveConstants.guidingMotorCurrentLimit);
 ////
-        // absoluteEncoder = motor.getAbsoluteEncoder();
-// TODO: KDUTYCYCLE
-        config.absoluteEncoder.positionConversionFactor(2.0 * Math.PI);
-        config.absoluteEncoder.velocityConversionFactor(2.0 * Math.PI);
 
+        absoluteEncoder = motor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle);
+        absoluteEncoder.setPositionConversionFactor(2.0 * Math.PI);
+        absoluteEncoder.setVelocityConversionFactor(2.0 * Math.PI);
         //Note: a relative encoder has a .setInverte() method, however it causes WPIlib to brick.
         //Instead we just subtract it always ig ¯\_(ツ)_/¯
-        config.absoluteEncoder.inverted(false);
-
+        absoluteEncoder.setInverted(false);
 
         //The reading from the absolute encoder only updates at about 5hz. This is why swerve for the
         //first two years was dogwater. The relative encoder updates as fast as the RIO does.
         //So far there have been no problems with reading accuracy.
         relativeEncoder = motor.getEncoder();
-        absoluteEncoder = motor.getAbsoluteEncoder();
-
-        config.encoder.positionConversionFactor(2.0 * Math.PI * SwerveConstants.azimuthRatio);
-        config.encoder.velocityConversionFactor(2.0 * Math.PI * SwerveConstants.azimuthRatio);
+        relativeEncoder.setPositionConversionFactor(2.0 * Math.PI * SwerveConstants.azimuthRatio);
+        relativeEncoder.setVelocityConversionFactor(2.0 * Math.PI * SwerveConstants.azimuthRatio);
 
         //This basically just means we use the absolute encoder only once on startup
         relativeEncoder.setPosition(0.0);
@@ -78,7 +53,7 @@ public class SwerveGuidingMotor implements PIDTuneable {
 
         PID = new PIDController(position.guidingP, 0.0, 0.0);
 
-        motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        motor.burnFlash();
     }
 
     public void update(){
@@ -86,7 +61,6 @@ public class SwerveGuidingMotor implements PIDTuneable {
             motor.set(0.0);
             return;
         }
-        xPub.set(motor.getEncoder().getPosition());
 
         double angleDiff = distanceToTarget();
         double percent = PID.calculate(angleDiff, 0.0);

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2077.drivetrain.swerve;
 
+import static org.usfirst.frc.team2077.common.WheelPosition.BACK_LEFT;
+
 import org.usfirst.frc.team2077.math.RateLimiter;
 import org.usfirst.frc.team2077.util.PIDTuneable;
 
@@ -10,6 +12,12 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.networktables.DoublePublisher;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.NetworkTableValue;
+
 import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.ClosedLoopConfigAccessor;
@@ -17,7 +25,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 public class SwerveDrivingMotor implements PIDTuneable {
 
-    private static final int motorFreeSpeed = 5800; //RPM
+    private static final int motorFreeSpeed = 800; //RPM
 
     private final SwerveConstants.MotorPosition position;
     private final SwerveModule parent;
@@ -25,9 +33,11 @@ public class SwerveDrivingMotor implements PIDTuneable {
     private RateLimiter rateLimiter;
 
     private final SparkMax motor;
+    SparkMaxConfig config;
+
     // private final RelativeEncoder encoder;
-    private final ClosedLoopConfigAccessor PIDAccessor;
-    private final ClosedLoopConfig PIDSeter;
+    // private final ClosedLoopConfigAccessor PIDAccessor;
+    // private final ClosedLoopConfig PIDSeter;
 
     private double velocitySet = 0;
     private boolean reversed = false;
@@ -36,28 +46,30 @@ public class SwerveDrivingMotor implements PIDTuneable {
         this.parent = parent;
         this.position = position;
 
-        rateLimiter = new RateLimiter(6, 10);
+        rateLimiter = new RateLimiter(2, 4);
 
         motor = new SparkMax(position.drivingCANid, SparkLowLevel.MotorType.kBrushless);
-        SparkMaxConfig config = new SparkMaxConfig();
+        config = new SparkMaxConfig();
         
         config.idleMode(IdleMode.kBrake);
+        config.smartCurrentLimit(SwerveConstants.drivingMotorCurrentLimit);
+
+        
         config.encoder.velocityConversionFactor(SwerveConstants.wheelCircumference / SwerveConstants.driveGearReduction / 60.0);
 
-        config.smartCurrentLimit(SwerveConstants.drivingMotorCurrentLimit);
         
         config.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder).pid(position.drivingP, position.drivingI, 0.0);
 
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-        PIDSeter = config.closedLoop;
-        PIDAccessor = motor.configAccessor.closedLoop;
+        // PIDSeter = config.closedLoop;
+        // PIDAccessor = motor.configAccessor.closedLoop;
     }
 
     public void update(){
         if(parent.calibrating){
             return;
-        }
+        }        
 
 //        motor.set(
 //                rateLimiter.calculate(
@@ -65,7 +77,12 @@ public class SwerveDrivingMotor implements PIDTuneable {
 //                ) *  position.drivingF * (reversed? -1 : 1)
 //        );
 
+        if(position == SwerveConstants.MotorPosition.BACK_LEFT){
+            // reversed = true;
+        }
         motor.getClosedLoopController().setReference(
+
+
                 rateLimiter.calculate(
                     velocitySet * (reversed? -1 : 1)
                 ),
@@ -74,7 +91,7 @@ public class SwerveDrivingMotor implements PIDTuneable {
     }
 
     public double getVelocityMeasured(){
-        return motor.getAbsoluteEncoder().getVelocity();
+        return motor.getEncoder().getVelocity();
     }
 
     public double getVelocitySet() {
@@ -102,23 +119,23 @@ public class SwerveDrivingMotor implements PIDTuneable {
     }
 
     public double getP() {
-        return PIDAccessor.getP();
+        return motor.configAccessor.closedLoop.getP();
     }
     public double getI() {
-        return PIDAccessor.getI();
+        return motor.configAccessor.closedLoop.getI();
     }
     public double getD() {
-        return PIDAccessor.getD();
+        return motor.configAccessor.closedLoop.getD();
     }
 
     public void setP(double p) {
-        PIDSeter.p(p);
+        config.closedLoop.p(p);
     }
     public void setI(double i) {
-        PIDSeter.i(i);
+        config.closedLoop.i(i);
     }
     public void setD(double d) {
-        PIDSeter.d(d);
+        config.closedLoop.d(d);
     }
 
     @Override
@@ -146,7 +163,7 @@ public class SwerveDrivingMotor implements PIDTuneable {
     @Override
     public void zeroIntegral() {
         setVelocity(0);
-        PIDSeter.i(0.0);
+        config.closedLoop.i(0.0);
     }
 
     @Override

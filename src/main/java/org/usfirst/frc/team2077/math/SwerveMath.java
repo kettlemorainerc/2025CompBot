@@ -44,9 +44,9 @@ public class SwerveMath {
     private static final EnumMap<WheelPosition, Multiplier> WHEEL_MULTIPLIERS = new EnumMap<>(WheelPosition.class);
     static {
         WHEEL_MULTIPLIERS.put(FRONT_LEFT, new Multiplier(-1, 1));
-        WHEEL_MULTIPLIERS.put(BACK_LEFT, new Multiplier(-1, -1));
+        WHEEL_MULTIPLIERS.put(BACK_LEFT, new Multiplier(1, 1));
 
-        WHEEL_MULTIPLIERS.put(FRONT_RIGHT, new Multiplier(1, 1));
+        WHEEL_MULTIPLIERS.put(FRONT_RIGHT, new Multiplier(-1, -1));
         WHEEL_MULTIPLIERS.put(BACK_RIGHT, new Multiplier(1, -1));
     }
 

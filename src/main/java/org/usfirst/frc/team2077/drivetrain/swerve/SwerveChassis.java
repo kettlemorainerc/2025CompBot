@@ -24,9 +24,10 @@ public class SwerveChassis extends AbstractChassis<SwerveModule> {
     private final double minDriveInputPercent = 0.001;
 
     private double heading = 0.0;
-    private boolean fieldOriented = true;
+    // private boolean fieldOriented = false;
 
     private static EnumMap<WheelPosition, SwerveModule> buildDriveTrain() {
+        
         EnumMap<WheelPosition, SwerveModule> map = new EnumMap<>(WheelPosition.class);
 
         for(SwerveConstants.MotorPosition p : SwerveConstants.MotorPosition.values()){
@@ -40,6 +41,7 @@ public class SwerveChassis extends AbstractChassis<SwerveModule> {
         super(buildDriveTrain());
 
 //        gyro = new ADIS16470_IMU();
+        // resetGyro();
 
         maximumSpeed = this.driveModules.values().stream().map(DriveModuleIF::getMaximumSpeed).min(Comparator.naturalOrder()).orElseThrow();
 
@@ -65,10 +67,10 @@ public class SwerveChassis extends AbstractChassis<SwerveModule> {
     @Override protected void updateDriveModules() {
 
         Vector target = velocitySet.copy();
-        if(fieldOriented) { //TODO, add
-            double gyroOffset = Math.toRadians(gyro.getAngle());
-            target.rotate(gyroOffset);
-        }
+        // if(fieldOriented) { //TODO, add
+        //     double gyroOffset = Math.toRadians(gyro.getAngle());
+        //     target.rotate(gyroOffset);
+        // }
 
         Map<WheelPosition, SwerveWheelTarget> wheelTargets = math.getWheelTargets(velocitySet, maximumSpeed, maximumRotation);
 
@@ -94,9 +96,9 @@ public class SwerveChassis extends AbstractChassis<SwerveModule> {
         gyro.reset();
     }
 
-    public void setFieldOriented(boolean v){
-        fieldOriented = v;
-    }
+    // public void setFieldOriented(boolean v){
+        // fieldOriented = v;
+    // }
 
     public static double getAngleDifference(double to, double from) {
         double diff = from - to;
