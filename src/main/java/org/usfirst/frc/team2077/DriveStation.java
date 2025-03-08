@@ -8,6 +8,7 @@ package org.usfirst.frc.team2077;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 
+import org.usfirst.frc.team2077.command.AlignGuidingMotors;
 import org.usfirst.frc.team2077.command.CoralPickuper;
 import org.usfirst.frc.team2077.command.ElevinatorTest;
 import org.usfirst.frc.team2077.command.ForkinatorBasicControls;
@@ -76,6 +77,7 @@ public class DriveStation {
         // new NewTest(Direction.BACKWARD).bind(new JoystickButton(secondary, 12));
         new ElevinatorTest(Move.UP).bind(new JoystickButton(secondary,1));
         new ElevinatorTest(Move.DOWN).bind(new JoystickButton(secondary, 5));
+        new AlignGuidingMotors().bind(new JoystickButton(secondary, 16));
         // new ForkinatorBasicControls(ForkDirection.UP).bind(new JoystickButton(secondary, 4));
         // new ForkinatorBasicControls(ForkDirection.DOWN).bind(new JoystickButton(secondary, 8));
     }

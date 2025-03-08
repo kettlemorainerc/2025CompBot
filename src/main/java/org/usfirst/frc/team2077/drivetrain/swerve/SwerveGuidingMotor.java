@@ -146,7 +146,7 @@ public class SwerveGuidingMotor implements PIDTuneable {
         angleSet = angle;
     }
 
-    //Use sparingly (duh)
+    //Use sparingly.please(duh)
     public void setAngleForced(double angle){
         double angleDifference = distanceToTarget();
 
@@ -180,24 +180,24 @@ public class SwerveGuidingMotor implements PIDTuneable {
 
     @Override
     public void tuningSet(double setpoint) {
-        parent.calibrating = true;
+        // parent.calibrating = true;
 
-        this.setpoint = setpoint;
-        double angleDiff = SwerveChassis.getAngleDifference(setpoint, getAngle());
-        double p = -PID.calculate(Math.abs(angleDiff), 0.0) * Math.signum(angleDiff);
+        // this.setpoint = setpoint;
+        // double angleDiff = SwerveChassis.getAngleDifference(setpoint, getAngle());
+        // double p = -PID.calculate(Math.abs(angleDiff), 0.0) * Math.signum(angleDiff);
 
-        if(Math.abs(p) < 0.001){
-            p = 0.0;
-        }
+        // if(Math.abs(p) < 0.001){
+        //     p = 0.0;
+        // }
 
-        motor.set(p);
+        // motor.set(p);
     }
 
     @Override
     public void tuningStop() {
-        parent.calibrating = true;
+        // parent.calibrating = true;
 
-        motor.set(0.0);
+        // motor.set(0.0);
     }
 
     @Override
@@ -219,5 +219,11 @@ public class SwerveGuidingMotor implements PIDTuneable {
     @Override
     public String getName() {
         return position.name() + "_GUIDING_MOTOR";
+    }
+
+    public void alignGuidingMotors(){
+        System.out.println("Trying to move the motor");
+        double absolutlePosition =  absoluteEncoder.getPosition();
+        setAngle(0);
     }
 }
