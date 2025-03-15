@@ -13,8 +13,8 @@ public class ForkinatorBasicControls extends RepeatedCommand {
     private final ForkDirection direction;
     private final Forkinator forkinator;
 
-    public ForkinatorBasicControls(ForkDirection up){
-        this.direction = up;
+    public ForkinatorBasicControls(ForkDirection direction){
+        this.direction = direction;
         forkinator = RobotHardware.getInstance().forkinator;
     }
 
@@ -23,7 +23,10 @@ public class ForkinatorBasicControls extends RepeatedCommand {
     public void execute() {
         if(direction == ForkDirection.UP){
             forkinator.raiseForkinator();
+        }else if(direction == ForkDirection.DOWN){
+            forkinator.lowerForkinator();
         }
+        forkinator.printEncoder("Current Encoder Position:");
     }
 
     @Override

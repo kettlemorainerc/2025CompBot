@@ -3,7 +3,6 @@ package org.usfirst.frc.team2077;
 // import edu.wpi.first.cameraserver.CameraServer;
 import org.usfirst.frc.team2077.common.HardwareRequirements;
 import org.usfirst.frc.team2077.common.WheelPosition;
-import org.usfirst.frc.team2077.common.subsystem.MotorRun;
 import org.usfirst.frc.team2077.drivetrain.swerve.SwerveChassis;
 // import org.usfirst.frc.team2077.subsystem.*;
 import org.usfirst.frc.team2077.drivetrain.swerve.SwerveModule;
@@ -28,6 +27,7 @@ public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChas
 
 
     private final SwerveChassis chassis;
+    public final Extendinator extendinator;
 
     public RobotHardware() {
         instance = this;
@@ -40,6 +40,7 @@ public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChas
         chassis  = new SwerveChassis();
         elevinator = new Elevinator();
         forkinator = new Forkinator();
+        extendinator = new Extendinator();
     }
 
     @Override public SwerveChassis getChassis() {

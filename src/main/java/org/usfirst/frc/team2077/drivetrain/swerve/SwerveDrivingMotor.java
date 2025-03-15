@@ -25,7 +25,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 public class SwerveDrivingMotor implements PIDTuneable {
 
-    private static final int motorFreeSpeed = 800; //RPM
+    private static final int motorFreeSpeed = 5800; //RPM
 
     private final SwerveConstants.MotorPosition position;
     private final SwerveModule parent;

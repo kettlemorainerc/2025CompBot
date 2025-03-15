@@ -2,6 +2,7 @@ package org.usfirst.frc.team2077.subsystem;
 
 import org.usfirst.frc.team2077.common.command.RepeatedCommand;
 
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
@@ -17,13 +18,19 @@ public class Forkinator implements Subsystem {
 
     private final SparkMax motor;
     private final SparkClosedLoopController motorPid;
+    private double max;
+    private double mid;
+    private double min;
 
     public Forkinator(){
-        motor = new SparkMax(6, MotorType.kBrushless);
+        motor = new SparkMax(4, MotorType.kBrushless);
+        min = 0;
+        mid = -8000.0;
+        max = 150000;
         motorPid = motor.getClosedLoopController();
         SparkMaxConfig config = new SparkMaxConfig();
         config
-            .inverted(false)
+            .inverted(true)
             .idleMode(IdleMode.kBrake);
         config.encoder
             .positionConversionFactor(1000)
@@ -33,18 +40,29 @@ public class Forkinator implements Subsystem {
             .pid(1.0, 0.0, 0.0);
         
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        printEncoder("Start encoder position:");
     }
 
     public void raiseForkinator(){
-        motor.set(0.2);
+        if(motor.getEncoder().getPosition() < max){
+            motor.set(0.2);
+        }
+        printEncoder("raise");
     }
 
     public void lowerForkinator(){
-        motor.set(-0.2);
+        if(motor.getEncoder().getPosition() > min){
+            motor.set(-0.2);
+        }
+        printEncoder("lower");
     }
 
     public void stopForkinator(){
         motor.set(0);
+    }
+
+    public void printEncoder(String text){
+        System.out.println(text + " " + motor.getEncoder().getPosition());
     }
 
 }

@@ -222,8 +222,19 @@ public class SwerveGuidingMotor implements PIDTuneable {
     }
 
     public void alignGuidingMotors(){
-        System.out.println("Trying to move the motor");
         double absolutlePosition =  absoluteEncoder.getPosition();
-        setAngle(0);
+        if(absolutlePosition > 0.1){
+            motor.set(0.1);
+        }else if(absolutlePosition < 0.1){
+            motor.set(-0.1);
+        }else{
+            motor.set(0);
+            zeroIntegral();
+        }
+        // System.out.println("Trying to move the motor "+absolutlePosition);
+
+        // setAngle(0);
+        // zeroIntegral();
+        // angleOffset absolutlePosition
     }
 }

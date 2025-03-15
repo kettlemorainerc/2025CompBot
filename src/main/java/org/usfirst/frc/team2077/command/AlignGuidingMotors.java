@@ -31,7 +31,10 @@ public class AlignGuidingMotors extends RepeatedCommand{
 
     @Override
     public void execute() {
-        
+        robotHardware.getWheel(FRONT_LEFT).getGuidingMotor().alignGuidingMotors();
+        robotHardware.getWheel(FRONT_RIGHT).getGuidingMotor().alignGuidingMotors();
+        robotHardware.getWheel(BACK_LEFT).getGuidingMotor().alignGuidingMotors();
+        robotHardware.getWheel(BACK_RIGHT).getGuidingMotor().alignGuidingMotors();
     }
 
     @Override
