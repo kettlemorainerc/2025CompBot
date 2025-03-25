@@ -35,7 +35,8 @@ public class SwerveGuidingMotor implements PIDTuneable {
     private double atAngleDeadzone = Math.PI / 12.0;
 
     private final NetworkTableInstance badTest;
-    DoublePublisher xPub;
+    DoublePublisher relativePub;
+    DoublePublisher absolutePub;
 
     public SwerveGuidingMotor(SwerveConstants.MotorPosition position, SwerveModule parent) {
         this.parent = parent;
@@ -43,7 +44,8 @@ public class SwerveGuidingMotor implements PIDTuneable {
 
         badTest = NetworkTableInstance.getDefault();
         badTest.getTable("SmartDashboard");
-        xPub = badTest.getDoubleTopic(getName()).publish();
+        relativePub = badTest.getDoubleTopic(getName()+" Relative").publish();
+        absolutePub = badTest.getDoubleTopic(getName()+" Absolute").publish();
 
         angleOffset = position.angleOffset;
 
@@ -86,7 +88,11 @@ public class SwerveGuidingMotor implements PIDTuneable {
             motor.set(0.0);
             return;
         }
-        xPub.set(motor.getEncoder().getPosition());
+        relativePub.set(motor.getEncoder().getPosition()*180);
+        absolutePub.set(motor.getEncoder().getPosition()*180);
+
+        
+        
 
         double angleDiff = distanceToTarget();
         double percent = PID.calculate(angleDiff, 0.0);

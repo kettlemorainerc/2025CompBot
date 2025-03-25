@@ -26,7 +26,7 @@ public class ExtendinatorBasicControls extends RepeatedCommand {
         }else if(direction == ExtendDirection.OUT){
             extendinator.lowerExtendinator();
         }
-        extendinator.printEncoder("Current Encoder Position:");
+        // extendinator.printEncoder("Current Encoder Position:");
     }
 
     @Override

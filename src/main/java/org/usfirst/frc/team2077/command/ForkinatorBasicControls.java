@@ -26,7 +26,7 @@ public class ForkinatorBasicControls extends RepeatedCommand {
         }else if(direction == ForkDirection.DOWN){
             forkinator.lowerForkinator();
         }
-        forkinator.printEncoder("Current Encoder Position:");
+        // forkinator.printEncoder("Current Encoder Position:");
     }
 
     @Override

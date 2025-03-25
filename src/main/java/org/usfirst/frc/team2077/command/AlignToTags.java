@@ -30,7 +30,7 @@ public class AlignToTags extends RepeatedCommand{
             if(targetX > 2){
                 chassis.setRotationPercent(dynamicPercentage);
             }else if(targetX < -2){
-                chassis.setRotationPercent(dynamicPercentage);
+                chassis.setRotationPercent(-dynamicPercentage);
             }else{
                 chassis.halt();
             }

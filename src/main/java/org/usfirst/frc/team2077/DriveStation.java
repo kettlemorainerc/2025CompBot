@@ -78,6 +78,11 @@ public class DriveStation {
         // new NewTest(Direction.FORWARD).bind(new JoystickButton(secondary, 11));
         new ElevinatorBasicControls(ElevatorDirection.RAISE).bind(new JoystickButton(secondary,1));
         new ElevinatorBasicControls(ElevatorDirection.LOWER).bind(new JoystickButton(secondary, 5));
+        new ElevinatorBasicControls(ElevatorDirection.POS1).bind(new JoystickButton(secondary,9));
+        new ElevinatorBasicControls(ElevatorDirection.POS2).bind(new JoystickButton(secondary,10));
+        new ElevinatorBasicControls(ElevatorDirection.POS3).bind(new JoystickButton(secondary,11));
+        new ElevinatorBasicControls(ElevatorDirection.POS4).bind(new JoystickButton(secondary,12));
+        new ElevinatorBasicControls(ElevatorDirection.POSPLAYER).bind(new JoystickButton(secondary,4));
         new AlignGuidingMotors().bind(new JoystickButton(secondary, 16));
         new AlignToTags(AprilTags.CORAL_STATION).bind(new JoystickButton(secondary, 13));
         new AlignToTags(AprilTags.PICKUP_STATION).bind(new JoystickButton(secondary, 14));
