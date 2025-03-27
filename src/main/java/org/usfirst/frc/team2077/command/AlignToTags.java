@@ -25,7 +25,7 @@ public class AlignToTags extends RepeatedCommand{
         double targetX = LimelightHelpers.getTX("");
         int targetID = (int) LimelightHelpers.getFiducialID("");
         double dynamicPercentage = targetX * targetX / 900;
-        System.out.println(dynamicPercentage);
+        // System.out.println(dynamicPercentage);
         if(Arrays.stream(tags).anyMatch(i -> i == targetID)){
             if(targetX > 2){
                 chassis.setRotationPercent(dynamicPercentage);

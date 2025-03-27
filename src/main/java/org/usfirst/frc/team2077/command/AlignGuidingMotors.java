@@ -17,11 +17,11 @@ public class AlignGuidingMotors extends RepeatedCommand{
 
     
     public AlignGuidingMotors(){
-        robotHardware = RobotHardware.getInstance();
-        robotHardware.getWheel(FRONT_LEFT).getGuidingMotor().alignGuidingMotors();
-        robotHardware.getWheel(FRONT_RIGHT).getGuidingMotor().alignGuidingMotors();
-        robotHardware.getWheel(BACK_LEFT).getGuidingMotor().alignGuidingMotors();
-        robotHardware.getWheel(BACK_RIGHT).getGuidingMotor().alignGuidingMotors();
+        // robotHardware = RobotHardware.getInstance();
+        // robotHardware.getWheel(FRONT_LEFT).getGuidingMotor().alignGuidingMotors();
+        // robotHardware.getWheel(FRONT_RIGHT).getGuidingMotor().alignGuidingMotors();
+        // robotHardware.getWheel(BACK_LEFT).getGuidingMotor().alignGuidingMotors();
+        // robotHardware.getWheel(BACK_RIGHT).getGuidingMotor().alignGuidingMotors();
     }
 
     @Override

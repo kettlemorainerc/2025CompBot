@@ -83,12 +83,13 @@ public class SwerveGuidingMotor implements PIDTuneable {
         relativeEncoder = motor.getEncoder();
         absoluteEncoder = motor.getAbsoluteEncoder();
 
+        angleOffset = 0;//+= absoluteEncoder.getPosition();
+
         config.encoder.positionConversionFactor(2.0 * Math.PI * SwerveConstants.azimuthRatio);
         config.encoder.velocityConversionFactor(2.0 * Math.PI * SwerveConstants.azimuthRatio);
 
         //This basically just means we use the absolute encoder only once on startup
         relativeEncoder.setPosition(0.0);
-        angleOffset = absoluteEncoder.getPosition();
 
 
         // if(RobotHardware.getInstance().manualSelected){
@@ -105,16 +106,16 @@ public class SwerveGuidingMotor implements PIDTuneable {
     }
 
     public void manualSet(boolean setValue){
-        if(setTmp == 0){
-            if(setValue){
-                System.out.println("TRUE !!!!!!!");
-                angleOffset += absoluteEncoder.getPosition();
-            }else{
-                System.out.println("FALSE !!!!!!!");
-                angleOffset = absoluteEncoder.getPosition();
-            }
-            setTmp++;
-        }
+        // if(setTmp == 0){
+        //     if(setValue){
+        //         System.out.println("TRUE !!!!!!!");
+        //         angleOffset += absoluteEncoder.getPosition();
+        //     }else{
+        //         System.out.println("FALSE !!!!!!!");
+        //         angleOffset = absoluteEncoder.getPosition();
+        //     }
+        //     setTmp++;
+        // }
 
     }
 
@@ -264,7 +265,7 @@ public class SwerveGuidingMotor implements PIDTuneable {
     }
 
     public void alignGuidingMotors(){
-        double absolutlePosition =  absoluteEncoder.getPosition();
+        double absolutlePosition = absoluteEncoder.getPosition();
         if(absolutlePosition > 0.1){
             motor.set(0.1);
         }else if(absolutlePosition < 0.1){

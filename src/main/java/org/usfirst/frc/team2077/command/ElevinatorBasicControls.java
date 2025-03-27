@@ -47,12 +47,12 @@ public class ElevinatorBasicControls extends RepeatedCommand {
     public void initialize() {
         SequentialCommandGroup auto = new SequentialCommandGroup();
             // int autonomousNumber = autoDash.get().intValue();
-        System.out.println("START OF INIT");
-        auto.addCommands(
-            new AutoLaunch()
-        );
-        auto.schedule();
-        System.out.println("END OF INIT");
+        // System.out.println("START OF INIT");
+        // auto.addCommands(
+        //     new AutoLaunch()
+        // );
+        // auto.schedule();
+        // System.out.println("END OF INIT");
 
     }
 
