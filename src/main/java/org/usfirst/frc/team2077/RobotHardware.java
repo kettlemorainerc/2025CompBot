@@ -10,6 +10,9 @@ import org.usfirst.frc.team2077.subsystem.Elevinator;
 import org.usfirst.frc.team2077.subsystem.Extendinator;
 import org.usfirst.frc.team2077.subsystem.Forkinator;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChassis> {
 
     private static RobotHardware instance = null;
@@ -29,8 +32,20 @@ public class RobotHardware extends HardwareRequirements<SwerveModule, SwerveChas
     private final SwerveChassis chassis;
     public final Extendinator extendinator;
 
+    SendableChooser<Boolean> m_Chooser = new SendableChooser<>();
+    public final boolean manualSelected;
+    
     public RobotHardware() {
         instance = this;
+// TERRIBLE BUT QUICK CODE!!!
+
+        m_Chooser.setDefaultOption("Calabrated with tool", false);
+        m_Chooser.addOption("Straight from last match", true);
+        SmartDashboard.putData(m_Chooser);
+        manualSelected = m_Chooser.getSelected();
+
+
+
 
 //        CameraServer.startAutomaticCapture(0);
 //        CameraServer.startAutomaticCapture(1);

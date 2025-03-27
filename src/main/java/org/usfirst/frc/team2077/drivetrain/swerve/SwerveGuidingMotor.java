@@ -10,11 +10,17 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkBase.*;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.networktables.BooleanSubscriber;
 import edu.wpi.first.networktables.DoublePublisher;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team2077.RobotHardware;
 import org.usfirst.frc.team2077.drivetrain.swerve.SwerveConstants.MotorPosition;
 import org.usfirst.frc.team2077.util.PIDTuneable;
+import org.usfirst.frc.team2077.util.SmartDash.SmartDashNumber;
 
 public class SwerveGuidingMotor implements PIDTuneable {
 
@@ -37,6 +43,12 @@ public class SwerveGuidingMotor implements PIDTuneable {
     private final NetworkTableInstance badTest;
     DoublePublisher relativePub;
     DoublePublisher absolutePub;
+    private int setTmp = 0;
+    // final BooleanSubscriber manualWheelSub;
+    // SendableChooser<Boolean> m_Chooser = new SendableChooser<>();
+    // final boolean manualSelected;
+    // manualWheelSub = badTest.getBooleanTopic("manualwheel").subscribe(false);
+
 
     public SwerveGuidingMotor(SwerveConstants.MotorPosition position, SwerveModule parent) {
         this.parent = parent;
@@ -76,12 +88,36 @@ public class SwerveGuidingMotor implements PIDTuneable {
 
         //This basically just means we use the absolute encoder only once on startup
         relativeEncoder.setPosition(0.0);
-        angleOffset += absoluteEncoder.getPosition();
+        angleOffset = absoluteEncoder.getPosition();
+
+
+        // if(RobotHardware.getInstance().manualSelected){
+        //     System.out.println("TRUE !!!!!!!");
+        //     angleOffset += absoluteEncoder.getPosition();
+        // }else{
+        //     System.out.println("FALSE !!!!!!!");
+        //     angleOffset = absoluteEncoder.getPosition();
+        // }
 
         PID = new PIDController(position.guidingP, 0.0, 0.0);
 
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
+
+    public void manualSet(boolean setValue){
+        if(setTmp == 0){
+            if(setValue){
+                System.out.println("TRUE !!!!!!!");
+                angleOffset += absoluteEncoder.getPosition();
+            }else{
+                System.out.println("FALSE !!!!!!!");
+                angleOffset = absoluteEncoder.getPosition();
+            }
+            setTmp++;
+        }
+
+    }
+
 
     public void update(){
         if(parent.calibrating) {

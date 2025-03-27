@@ -40,29 +40,29 @@ public class Forkinator implements Subsystem {
             .pid(1.0, 0.0, 0.0);
         
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        printEncoder("Start encoder position:");
+        // printEncoder("Start encoder position:");
     }
 
     public void raiseForkinator(){
         if(motor.getEncoder().getPosition() < max){
             motor.set(0.2);
         }
-        printEncoder("raise");
+        // printEncoder("raise");
     }
 
     public void lowerForkinator(){
-        if(motor.getEncoder().getPosition() > min){
+        // if(motor.getEncoder().getPosition() > min){
             motor.set(-0.2);
-        }
-        printEncoder("lower");
+        // }
+        // printEncoder("lower");
     }
 
     public void stopForkinator(){
         motor.set(0);
     }
 
-    public void printEncoder(String text){
-        System.out.println(text + " " + motor.getEncoder().getPosition());
-    }
+    // public void printEncoder(String text){
+    //     System.out.println(text + " " + motor.getEncoder().getPosition());
+    // }
 
 }

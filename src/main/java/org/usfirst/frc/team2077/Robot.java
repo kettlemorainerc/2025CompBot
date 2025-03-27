@@ -5,6 +5,10 @@ import org.usfirst.frc.team2077.common.command.autonomous.AutoLaunch;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.*;
 
+import static org.usfirst.frc.team2077.common.WheelPosition.*;
+
+import org.usfirst.frc.team2077.common.WheelPosition;
+
 public class Robot extends TimedRobot {
     private RobotHardware hardware;
     private DriveStation driveStation;
@@ -39,6 +43,22 @@ public class Robot extends TimedRobot {
 
     }
 
+    @Override public void testInit() {
+        System.out.println("TEST INIT");
+
+
+    }
+
+
+    @Override public void testPeriodic(){
+        // RobotHardware robotHardware = RobotHardware.getInstance();
+        // robotHardware.getWheel(FRONT_LEFT).getGuidingMotor().manualSet(true);
+        // robotHardware.getWheel(FRONT_RIGHT).getGuidingMotor().manualSet(true);
+        // robotHardware.getWheel(BACK_LEFT).getGuidingMotor().manualSet(true);
+        // robotHardware.getWheel(BACK_RIGHT).getGuidingMotor().manualSet(true);
+    }
+
+    
     /**
      * Called roughly every 1/50th second while the robot is "enabled" in "Autonomous" mode
      */
