@@ -74,33 +74,33 @@ public class ElevinatorBasicControls extends RepeatedCommand {
                 elevinator.stopElevinator();
             }
         }else if(move == ElevatorDirection.POS2){
-            if(elevinator.getEncoderPosition() < pos2-500){
+            if(elevinator.getEncoderPosition() < pos2-1000){
                 elevinator.raiseElevinator();
-            }else if(elevinator.getEncoderPosition() > pos2+500){
+            }else if(elevinator.getEncoderPosition() > pos2+1000){
                 elevinator.lowerElevinator();
             }else{
                 elevinator.stopElevinator();
             }
         }else if(move == ElevatorDirection.POS3){
-            if(elevinator.getEncoderPosition() < pos3-500){
+            if(elevinator.getEncoderPosition() < pos3-1000){
                 elevinator.raiseElevinator();
-            }else if(elevinator.getEncoderPosition() > pos3+500){
+            }else if(elevinator.getEncoderPosition() > pos3+1000){
                 elevinator.lowerElevinator();
             }else{
                 elevinator.stopElevinator();
             }
         }else if(move == ElevatorDirection.POS4){
-            if(elevinator.getEncoderPosition() < pos4-500){
+            if(elevinator.getEncoderPosition() < pos4-1000){
                 elevinator.raiseElevinator();
-            }else if(elevinator.getEncoderPosition() > pos4+500){
+            }else if(elevinator.getEncoderPosition() > pos4+1000){
                 elevinator.lowerElevinator();
             }else{
                 elevinator.stopElevinator();
             }
         }else if(move == ElevatorDirection.POSPLAYER){
-            if(elevinator.getEncoderPosition() < posPlayer-500){
+            if(elevinator.getEncoderPosition() < posPlayer-1000){
                 elevinator.raiseElevinator();
-            }else if(elevinator.getEncoderPosition() > posPlayer+500){
+            }else if(elevinator.getEncoderPosition() > posPlayer+1000){
                 elevinator.lowerElevinator();
             }else{
                 elevinator.stopElevinator();

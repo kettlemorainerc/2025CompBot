@@ -45,20 +45,24 @@ public class Forkinator implements Subsystem {
 
     public void raiseForkinator(){
         if(motor.getEncoder().getPosition() < max){
-            motor.set(0.2);
+            motor.set(0.4);
         }
         // printEncoder("raise");
     }
 
     public void lowerForkinator(){
         // if(motor.getEncoder().getPosition() > min){
-            motor.set(-0.2);
+            motor.set(-0.4);
         // }
         // printEncoder("lower");
     }
 
     public void stopForkinator(){
         motor.set(0);
+    }
+
+    public double getEncoderPosition(){
+        return(motor.getEncoder().getPosition());
     }
 
     // public void printEncoder(String text){

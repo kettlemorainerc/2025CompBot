@@ -89,6 +89,9 @@ public class DriveStation {
         new AlignToTags(AprilTags.PROCESSING_STATION).bind(new JoystickButton(secondary, 15));
         new ForkinatorBasicControls(ForkDirection.UP).bind(new JoystickButton(secondary, 3));
         new ForkinatorBasicControls(ForkDirection.DOWN).bind(new JoystickButton(secondary, 7));
+        new ForkinatorBasicControls(ForkDirection.COLLECT).bind(new JoystickButton(secondary, 8));
+        new ForkinatorBasicControls(ForkDirection.DROP).bind(new JoystickButton(secondary, 17));
+        new ForkinatorBasicControls(ForkDirection.HOLD).bind(new JoystickButton(secondary, 18));
         new ExtendinatorBasicControls(ExtendDirection.IN).bind(new JoystickButton(secondary, 6));
         new ExtendinatorBasicControls(ExtendDirection.OUT).bind(new JoystickButton(secondary, 2));
     }

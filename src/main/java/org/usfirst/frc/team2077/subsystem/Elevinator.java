@@ -61,14 +61,14 @@ public class Elevinator implements Subsystem {
 
     public void raiseElevinator(){
     // if(motor.getEncoder().getPosition() < max)
-        motor.set(0.4);
+        motor.set(0.6);
         // motorPosition.set(motor.getEncoder().getPosition());
         SmartDashboard.putNumber("position", getEncoderPosition());
     }
 
     public void lowerElevinator(){
         // if(motor.getEncoder().getPosition() > min)
-        motor.set(-0.3);
+        motor.set(-0.5);
         // motorPosition.set(motor.getEncoder().getPosition());
         SmartDashboard.putNumber("position", getEncoderPosition());
     }
