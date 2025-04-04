@@ -4,8 +4,7 @@ import edu.wpi.first.math.util.Units;
 
 public class SwerveConstants {
 
-    public static final double accelerationRate = 6.0;
-    public static final double deccelerationRate = 12.0;
+    public static final double accelerationRate = 600.0;
 
     //Physical Constants
     public static final double wheelBaseLength = Units.inchesToMeters(26);
@@ -24,10 +23,10 @@ public class SwerveConstants {
 
     // Module Specific Constants
     public enum MotorPosition{
-        FRONT_LEFT (12, 11, 1.5, 1.5e-01, 1.5e-03, 4.5e-01),
-        BACK_RIGHT (17, 5, 0.5, 1.5e-01, 1.5e-03, 4.5e-01),
-        BACK_LEFT  (13, 7, 1,   1.5e-01, 1.5e-03, 4.5e-01),
-        FRONT_RIGHT(10, 3, 0,   1.5e-01, 1.5e-03, 4.5e-01),
+        FRONT_LEFT (12, 11, 1.5, 1.3e-01, 1.5e-03, 4.5e-01),
+        BACK_RIGHT (17, 5, 0.5, 1.3e-01, 1.5e-03, 4.5e-01),
+        BACK_LEFT  (13, 7, 1,   1.3e-01, 1.5e-03, 4.5e-01),
+        FRONT_RIGHT(10, 3, 0,   1.3e-01, 1.5e-03, 4.5e-01),
         ;
 
         public final int drivingCANid, guidingCANid;

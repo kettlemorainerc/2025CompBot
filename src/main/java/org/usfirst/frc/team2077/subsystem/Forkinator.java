@@ -26,7 +26,7 @@ public class Forkinator implements Subsystem {
         motor = new SparkMax(4, MotorType.kBrushless);
         min = 0;
         mid = -8000.0;
-        max = 150000;
+        max = 15000000;
         motorPid = motor.getClosedLoopController();
         SparkMaxConfig config = new SparkMaxConfig();
         config
@@ -45,14 +45,14 @@ public class Forkinator implements Subsystem {
 
     public void raiseForkinator(){
         if(motor.getEncoder().getPosition() < max){
-            motor.set(0.4);
+            motor.set(0.6);
         }
         // printEncoder("raise");
     }
 
     public void lowerForkinator(){
         // if(motor.getEncoder().getPosition() > min){
-            motor.set(-0.4);
+            motor.set(-0.6);
         // }
         // printEncoder("lower");
     }

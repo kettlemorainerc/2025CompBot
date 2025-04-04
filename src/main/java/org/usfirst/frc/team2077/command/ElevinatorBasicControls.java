@@ -35,7 +35,7 @@ public class ElevinatorBasicControls extends RepeatedCommand {
         elevinator = RobotHardware.getInstance().elevinator;
         this.move = move;
 
-        pos1 = 6000;
+        pos1 = 120000;
         pos2 = 26500;
         pos3 = 74000;
         pos4 = 150000;

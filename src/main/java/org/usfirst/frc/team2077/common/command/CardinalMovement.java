@@ -6,6 +6,7 @@
 package org.usfirst.frc.team2077.common.command;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.*;
 import org.usfirst.frc.team2077.RobotHardware;
 import org.usfirst.frc.team2077.common.control.DriveStick;
@@ -16,16 +17,24 @@ public class CardinalMovement extends Command {
     protected DriveXboxController stick;
     protected DriveChassisIF chassis;
 
-    public CardinalMovement(DriveXboxController driveStick) {
+    private final XboxController halfSwitch;
+
+    public CardinalMovement(DriveXboxController driveStick, XboxController halfSwitch) {
         addRequirements(RobotHardware.getInstance().getPosition());
 
         this.stick = driveStick;
         this.chassis = RobotHardware.getInstance().getChassis();
+        this.halfSwitch = halfSwitch;
     }
 
     @Override public void execute() {
         double north = -stick.getNorth();
         double east = stick.getEast();
+        if(halfSwitch.getRightTriggerAxis() > 0.8){
+            north = -stick.getNorth() / 2;
+            east = stick.getEast() / 2;
+        }
+
 
         if(DriverStation.isTeleop()) chassis.setVelocityPercent(north, east);
     }

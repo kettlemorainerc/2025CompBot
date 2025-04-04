@@ -42,11 +42,14 @@ public class DriveStation {
     private final DriveStick driveStick;
     private final Joystick technicalStick;
 
+    private final XboxController halfSwitch;
+
     public DriveStation(RobotHardware hardware) {
         /** Set the driver's control method this MUST be a {@link DriveStick} implementation */
 //        driveStick = getFlysky();
     //    driveStick = getJoystick();
         driveStick = getXbox();
+        halfSwitch = new XboxController(DRIVE_XBOX_PORT);
 
         /** Set the technical control method. This can be any {@link Joystick} implementation */
 //        technicalStick = getTechnicalJoystick();
@@ -61,8 +64,8 @@ public class DriveStation {
      */
     public void bind(RobotHardware hardware) {
         // Setup basic robot movement commands
-        hardware.getPosition().setDefaultCommand(new CardinalMovement((DriveXboxController) driveStick));
-        hardware.getHeading().setDefaultCommand(new RotationMovement(driveStick));
+        hardware.getPosition().setDefaultCommand(new CardinalMovement((DriveXboxController) driveStick, halfSwitch));
+        hardware.getHeading().setDefaultCommand(new RotationMovement(driveStick, halfSwitch));
 
         bindDriverControl(hardware, driveStick);
         bindTechnicalControl(hardware, technicalStick);
