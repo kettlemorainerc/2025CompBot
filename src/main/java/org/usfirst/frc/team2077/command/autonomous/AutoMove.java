@@ -23,13 +23,15 @@ public class AutoMove extends Command {
     private double strafeMultiplier;
 
     private double lastTime;
+    private double moveTime;
     private double distanceChange;
     private double[] startEncoders;
     private double[] currentEncoders;
 
-    public AutoMove(double forward, double strafe){
+    public AutoMove(double forward, double strafe, double moveTime){
         this.forward = forward;
         this.strafe = strafe;
+        this.moveTime = moveTime;
     }
 
 
