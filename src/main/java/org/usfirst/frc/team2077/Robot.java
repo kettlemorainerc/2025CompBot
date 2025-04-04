@@ -2,6 +2,7 @@ package org.usfirst.frc.team2077;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.*;
+import org.usfirst.frc.team2077.command.autonomous.AutonomousManager;
 
 public class Robot extends TimedRobot {
     private RobotHardware hardware;
@@ -26,7 +27,7 @@ public class Robot extends TimedRobot {
      * When you click the "Autonomous" option in driver station
      */
     @Override public void autonomousInit() {
-
+        new AutonomousManager(AutonomousManager.AUTONOMOUSTYPE.BASIC_MOVE);
     }
 
     /**
