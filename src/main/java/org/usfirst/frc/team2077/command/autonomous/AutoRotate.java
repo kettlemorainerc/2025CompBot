@@ -12,8 +12,8 @@ public class AutoRotate extends Command {
      private double initialAngle;
      private AHRS gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
 
-     public AutoRotate(double angle){
-          targetAngle = angle;
+     public AutoRotate(double angleRelative){
+          targetAngle = angleRelative;
      }
      @Override
      public void initialize(){
