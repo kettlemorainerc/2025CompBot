@@ -2,9 +2,6 @@ package org.usfirst.frc.team2077;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.*;
-import org.usfirst.frc.team2077.command.autonomous.AutoMove;
-import org.usfirst.frc.team2077.command.autonomous.AutoRotate;
-import org.usfirst.frc.team2077.command.autonomous.AutonomousManager;
 import org.usfirst.frc.team2077.command.autonomous.TimeBasedAutoMove;
 
 public class Robot extends TimedRobot {
